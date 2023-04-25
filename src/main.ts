@@ -5,7 +5,6 @@ import { createPhysicsBall, createPhysicsWall } from './physics';
 import PixiWorld from './PixiWorld';
 import * as PIXI from 'pixi.js';
 import RAPIER from '@dimforge/rapier2d-compat';
-import { FPS, ballAmount } from './text';
 
 // let circles: {
 //   circle: { body: RAPIER.RigidBody; collider: RAPIER.Collider };
@@ -168,8 +167,10 @@ async function start() {
   }
 
   //create walls
-  let floor = createWallObject(window.innerWidth, 50, true);
-  let leftWall = createWallObject(10, window.innerHeight * 3, false);
+  //floor
+  createWallObject(window.innerWidth, 50, true);
+  //left wall
+  createWallObject(10, window.innerHeight * 3, false);
   let rightWall = createWallObject(10, window.innerHeight * 3, false);
   let middleWall = createWallObject(10, window.innerHeight * 3, false);
   middleWall.wall.body.setTranslation(
@@ -274,11 +275,8 @@ async function start() {
   }
 
   circleCreator();
-  // let start = performance.now();
-  app.ticker.add((delta) => {
-    // start = performance.now();
 
-    // ballAmountText.text = 'Active circles: ' + currentCircle.toString();
+  app.ticker.add((delta) => {
     const d = delta * 0.1;
 
     rubyCircles.forEach((circle) => {
@@ -302,12 +300,5 @@ async function start() {
     });
     app.render();
     step(d);
-
-    // const currentDelta = performance.now() - start;
-    // const realFPS = 1000 / currentDelta;
-
-    // if (Math.random() > 0.7) {
-    //   // fps.text = ' FPS: ' + app.ticker.FPS.toFixed(3);
-    // }
   });
 }
